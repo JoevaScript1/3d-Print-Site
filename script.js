@@ -18,14 +18,32 @@ function renderCart() {
   cartList.innerHTML = "";
   let total = 0;
 
-  cartItems.forEach((item) => {
+  cartItems.forEach((item, index) => {
     total += item.price;
     const li = document.createElement("li");
-    li.textContent = `${item.name} — $${item.price}`;
+    li.className = "cart-item";
+
+    const itemInfo = document.createElement("span");
+    itemInfo.className = "cart-item__info";
+    itemInfo.textContent = `${item.name} — $${item.price}`;
+
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "cart-item__remove";
+    removeBtn.textContent = "✕";
+    removeBtn.title = "Remove item";
+    removeBtn.onclick = () => removeFromCart(index);
+
+    li.appendChild(itemInfo);
+    li.appendChild(removeBtn);
     cartList.appendChild(li);
   });
 
   cartTotal.textContent = `$${total}`;
+}
+
+function removeFromCart(index) {
+  cartItems.splice(index, 1);
+  renderCart();
 }
 
 addToCartButtons.forEach((button) => {
