@@ -154,6 +154,19 @@ main {
   color: var(--muted);
 }
 
+.hero-logo-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-logo {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  filter: drop-shadow(0 8px 40px rgba(108, 140, 255, 0.35));
+}
+
 .hero-card,
 .info-card,
 .gallery-card,
