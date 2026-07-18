@@ -93,7 +93,7 @@ export const handler = async function (event) {
         product_data: {
           name: "Shipping & Handling",
         },
-        unit_amount: 599, // $5.99
+        unit_amount: 199, // $1.99
       },
       quantity: 1,
     });
