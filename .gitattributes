@@ -1,1 +1,2 @@
-netlify.toml -text
+* text=auto
+netlify.toml text eol=lf
