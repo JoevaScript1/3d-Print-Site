@@ -74,7 +74,7 @@ video {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.8rem 1.2rem;
+  padding: 1rem 1.5rem;
   border-radius: 999px;
   font-weight: 700;
   transition: transform 180ms ease, background 180ms ease;
@@ -242,13 +242,14 @@ main {
   margin: 0.5rem 0 0 0;
   font-size: 1rem;
 }
-.product-card h3,
-.cart-card h3 {
+.product-card h3 {
   margin: 0;
   padding: 0.75rem 0.75rem 0;
+  text-align: center;
 }
 
 .cart-card h3 {
+  margin: 0;
   text-align: center;
   padding: 0 0.75rem 1rem;
 }
@@ -403,7 +404,7 @@ main {
 
 .product-card,
 .cart-card {
-  padding: 1.2rem;
+  padding: 1.5rem;
 }
 
 .product-meta,
@@ -412,6 +413,8 @@ main {
   justify-content: space-between;
   align-items: center;
   margin-top: 1rem;
+  padding: 0.75rem 0.5rem;
+  font-weight: 600;
 }
 
 .price {
@@ -442,8 +445,10 @@ main {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.75rem;
-  padding: 0.5rem 0;
+  padding: 0.75rem 0.75rem;
   border-bottom: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .cart-item__info {
@@ -463,6 +468,12 @@ main {
 
 .cart-item__remove:hover {
   color: var(--accent);
+}
+
+.cart-card button {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 1rem 1.5rem !important;
 }
 
 .contact-form {
