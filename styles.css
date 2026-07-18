@@ -441,9 +441,6 @@ main {
 }
 
 .cart-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-bottom: 0.5rem;
   padding: 0.5rem 0.75rem;
   border-bottom: 1px solid var(--border);
@@ -452,13 +449,26 @@ main {
 }
 
 .cart-item__info {
-  flex: 1;
   font-size: 0.9rem;
   line-height: 1.4;
+  display: inline;
 }
 
 .cart-item__remove {
-  display: none;
+  display: inline;
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0;
+  margin: 0;
+  transition: color 180ms ease;
+  line-height: 1;
+}
+
+.cart-item__remove:hover {
+  color: var(--accent);
 }
 
 .cart-card button {

@@ -25,16 +25,17 @@ function renderCart() {
 
     const itemInfo = document.createElement("span");
     itemInfo.className = "cart-item__info";
-    itemInfo.textContent = `${item.name} — $${item.price}`;
 
     const removeBtn = document.createElement("button");
     removeBtn.className = "cart-item__remove";
-    removeBtn.textContent = "✕";
+    removeBtn.textContent = " ✕";
     removeBtn.title = "Remove item";
     removeBtn.onclick = () => removeFromCart(index);
 
+    itemInfo.textContent = `${item.name} — $${item.price}`;
+    itemInfo.appendChild(removeBtn);
+
     li.appendChild(itemInfo);
-    li.appendChild(removeBtn);
     cartList.appendChild(li);
   });
 
