@@ -1,2 +1,6 @@
 [build]
   publish = "."
+
+[functions]
+  directory = "netlify/functions"
+  excluded_patterns = ["**/*.test.js", "**/*.test.ts", "**/*.spec.js", "**/*.spec.ts"]
