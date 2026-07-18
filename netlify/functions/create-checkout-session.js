@@ -1,48 +1,76 @@
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+import Stripe from "stripe";
 
-exports.handler = async function (event) {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+function getSiteOrigin(event) {
+  const configuredOrigin =
+    process.env.SITE_URL ||
+    process.env.URL ||
+    process.env.DEPLOY_PRIME_URL ||
+    process.env.DEPLOY_URL;
+
+  if (configuredOrigin) {
+    return configuredOrigin.replace(/\/$/, "");
+  }
+
+  const originHeader = event.headers?.origin || event.headers?.referer;
+  if (originHeader) {
+    const match = originHeader.match(/^https?:\/\/[^/]+/);
+    return match ? match[0] : "http://localhost:8888";
+  }
+
+  return "http://localhost:8888";
+}
+
+function getPriceLookup() {
+  const rawValue = process.env.STRIPE_PRICE_IDS || "{}";
+
+  try {
+    return JSON.parse(rawValue);
+  } catch (error) {
+    throw new Error(
+      "STRIPE_PRICE_IDS must be a valid JSON object mapping product names to Stripe price IDs.",
+    );
+  }
+}
+
+export const handler = async function (event) {
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: JSON.stringify({ error: "Method not allowed" }) };
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ error: "Method not allowed" }),
+    };
   }
 
   try {
     const { items, email } = JSON.parse(event.body || "{}") || {};
 
     if (!items || !Array.isArray(items) || items.length === 0) {
-      return { statusCode: 400, body: JSON.stringify({ error: "No items provided" }) };
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: "No items provided" }),
+      };
     }
 
-    const normalizedEmail = typeof email === "string" && email.includes("@") ? email : "";
-    const productPriceCache = new Map();
+    const normalizedEmail =
+      typeof email === "string" && email.includes("@") ? email : "";
+    const priceLookup = getPriceLookup();
 
-    async function getPriceId(item) {
-      const key = `${item.name}::${item.price}`;
-      if (productPriceCache.has(key)) {
-        return productPriceCache.get(key);
+    const line_items = items.map((item) => {
+      const priceId = priceLookup[item.name?.trim()];
+      if (!priceId) {
+        throw new Error(
+          `No Stripe price ID configured for "${item.name}". Add it to STRIPE_PRICE_IDS.`,
+        );
       }
 
-      const product = await stripe.products.create({
-        name: item.name,
-        metadata: { demo_mode: "true", item_name: item.name },
-      });
+      return {
+        price: priceId,
+        quantity: item.quantity || 1,
+      };
+    });
 
-      const price = await stripe.prices.create({
-        product: product.id,
-        currency: "usd",
-        unit_amount: Math.round((item.price || 0) * 100),
-      });
-
-      productPriceCache.set(key, price.id);
-      return price.id;
-    }
-
-    const priceIds = await Promise.all(items.map((item) => getPriceId(item)));
-    const line_items = items.map((item, index) => ({
-      price: priceIds[index],
-      quantity: item.quantity || 1,
-    }));
-
-    const origin = event.headers.origin || "https://your-site.netlify.app";
+    const origin = getSiteOrigin(event);
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items,
