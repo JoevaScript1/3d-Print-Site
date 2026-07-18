@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildLineItems } from "./create-checkout-session.js";
+import { buildLineItems } from "../netlify/functions/create-checkout-session.js";
 
 describe("buildLineItems", () => {
   it("creates Stripe price_data line items from cart prices", () => {
