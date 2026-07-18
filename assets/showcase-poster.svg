@@ -1,0 +1,9 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="3D print showcase poster">
+  <rect width="800" height="600" fill="#0f172a"/>
+  <rect x="60" y="64" width="680" height="472" rx="36" fill="#111c31" stroke="#304d79" stroke-width="6"/>
+  <circle cx="240" cy="250" r="96" fill="#6c8cff" opacity="0.9"/>
+  <rect x="376" y="184" width="220" height="140" rx="18" fill="#47d3c2" opacity="0.95"/>
+  <rect x="238" y="360" width="300" height="90" rx="20" fill="#f2f6ff" opacity="0.92"/>
+  <text x="120" y="140" fill="#f2f6ff" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="700">3D Print Showcase</text>
+  <text x="120" y="182" fill="#a4b1c4" font-family="Inter, Arial, sans-serif" font-size="24">Custom parts • display pieces • prototypes</text>
+</svg>

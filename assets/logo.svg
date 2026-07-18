@@ -1,0 +1,7 @@
+<svg width="320" height="96" viewBox="0 0 320 96" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Joe's 3D Printing logo">
+  <rect width="320" height="96" rx="24" fill="#09101b"/>
+  <rect x="14" y="14" width="68" height="68" rx="18" fill="#6c8cff"/>
+  <path d="M39 29v36l18-18-18-18Z" fill="#ffffff"/>
+  <text x="100" y="40" fill="#f2f6ff" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Joe's 3D Printing</text>
+  <text x="100" y="68" fill="#47d3c2" font-family="Inter, Arial, sans-serif" font-size="14">Custom Parts • Fast Quotes • Made to Order</text>
+</svg>

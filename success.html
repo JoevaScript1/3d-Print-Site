@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Complete</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Order Complete</p>
+        <h2>Thanks for your purchase!</h2>
+        <p id="message">Loading your order details…</p>
+      </div>
+
+      <div class="checkout-summary">
+        <p><strong>Order status:</strong> <span id="payment-status">Loading…</span></p>
+        <p><strong>Email:</strong> <span id="customer-email">Loading…</span></p>
+        <p><strong>Amount:</strong> <span id="amount-total">Loading…</span></p>
+        <div id="line-items"></div>
+      </div>
+
+      <a class="button primary" href="/">Return to Home</a>
+    </main>
+
+    <script>
+      async function formatAmount(amount, currency) {
+        return new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency,
+        }).format(amount / 100);
+      }
+
+      async function loadSession() {
+        const params = new URLSearchParams(window.location.search);
+        const sessionId = params.get('session_id');
+        if (!sessionId) {
+          document.getElementById('message').textContent = 'No checkout session ID found.';
+          return;
+        }
+
+        try {
+          const res = await fetch(`http://localhost:4242/checkout-session?session_id=${encodeURIComponent(sessionId)}`);
+          const data = await res.json();
+          if (!res.ok) {
+            throw new Error(data.error || 'Unable to load session');
+          }
+
+          const session = data.session;
+          document.getElementById('payment-status').textContent = session.payment_status;
+          document.getElementById('customer-email').textContent = session.customer_details?.email || 'N/A';
+          document.getElementById('amount-total').textContent = await formatAmount(session.amount_total, session.currency);
+          document.getElementById('message').textContent = 'Your payment was completed successfully.';
+
+          const lineItemsContainer = document.getElementById('line-items');
+          lineItemsContainer.innerHTML = '<h3>Items</h3>';
+          const list = document.createElement('ul');
+          session.line_items.data.forEach((item) => {
+            const li = document.createElement('li');
+            li.textContent = `${item.quantity} × ${item.description} — ${item.price.unit_amount ? new Intl.NumberFormat('en-US', { style: 'currency', currency: item.price.currency }).format(item.price.unit_amount / 100) : ''}`;
+            list.appendChild(li);
+          });
+          lineItemsContainer.appendChild(list);
+        } catch (err) {
+          console.error(err);
+          document.getElementById('message').textContent = 'Unable to load order details. Please contact support if you need help.';
+        }
+      }
+
+      loadSession();
+    </script>
+  </body>
+</html>
