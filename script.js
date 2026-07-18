@@ -109,3 +109,47 @@ if (checkoutButton) {
     }
   });
 }
+
+// Image carousel functionality
+function initCarousels() {
+  const carousels = document.querySelectorAll(".gallery-carousel");
+
+  carousels.forEach((carousel) => {
+    const container = carousel.querySelector(".carousel-container");
+    const images = carousel.querySelectorAll(".carousel-image");
+    const prevBtn = carousel.querySelector(".carousel-prev");
+    const nextBtn = carousel.querySelector(".carousel-next");
+    const dots = carousel.querySelectorAll(".carousel-dot");
+
+    let currentIndex = 0;
+
+    function showImage(index) {
+      images.forEach((img, i) => {
+        img.style.display = i === index ? "block" : "none";
+      });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+      });
+    }
+
+    prevBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    });
+
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        currentIndex = Number(dot.dataset.index);
+        showImage(currentIndex);
+      });
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", initCarousels);
