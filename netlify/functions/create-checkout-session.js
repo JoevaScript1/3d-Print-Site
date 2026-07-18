@@ -1,4 +1,7 @@
 import Stripe from "stripe";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -23,7 +26,13 @@ function getSiteOrigin(event) {
 }
 
 function getPriceLookup() {
-  const rawValue = process.env.STRIPE_PRICE_IDS || "{}";
+  const rawValue = process.env.STRIPE_PRICE_IDS;
+
+  if (!rawValue) {
+    throw new Error(
+      "STRIPE_PRICE_IDS is missing. Add it in Netlify Environment Variables or your local .env file.",
+    );
+  }
 
   try {
     return JSON.parse(rawValue);
