@@ -86,12 +86,27 @@ export const handler = async function (event) {
       typeof email === "string" && email.includes("@") ? email : "";
     const line_items = buildLineItems(items);
 
+    // Add shipping cost as a line item
+    line_items.push({
+      price_data: {
+        currency: "usd",
+        product_data: {
+          name: "Shipping & Handling",
+        },
+        unit_amount: 599, // $5.99
+      },
+      quantity: 1,
+    });
+
     const origin = getSiteOrigin(event);
     const session = await getStripe().checkout.sessions.create({
       payment_method_types: ["card"],
       line_items,
       mode: "payment",
       ...(normalizedEmail ? { customer_email: normalizedEmail } : {}),
+      shipping_address_collection: {
+        allowed_countries: ["US"],
+      },
       success_url: `${origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/canceled.html`,
     });
