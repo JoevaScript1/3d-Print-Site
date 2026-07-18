@@ -220,22 +220,29 @@ main {
   display: grid;
   grid-template-columns: 1.3fr 0.7fr;
   gap: 1.5rem;
+  align-items: stretch;
 }
 
 .gallery-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.75rem;
+  display: grid;
+  height: 100%;
 }
 
 .gallery-card {
   overflow: hidden;
   border-radius: 12px;
+  display: flex;
+  flex-direction: column;
 }
 
 .gallery-card img {
-  height: 240px;
+  height: 100%;
   object-fit: cover;
   border-radius: 12px;
+  flex: 1;
+  min-height: 240px;
 }
 
 .gallery-card h3 {
