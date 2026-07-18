@@ -462,10 +462,12 @@ main {
   border: none;
   color: var(--muted);
   cursor: pointer;
-  font-size: 1rem;
-  padding: 0.25rem;
+  font-size: 0.9rem;
+  padding: 0;
+  margin: 0;
   flex-shrink: 0;
   transition: color 180ms ease;
+  line-height: 1;
 }
 
 .cart-item__remove:hover {
