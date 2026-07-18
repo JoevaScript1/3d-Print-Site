@@ -458,39 +458,50 @@ main {
 }
 
 .contact-form {
-  padding: 1.25rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid var(--border);
 }
 
 .form-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 label {
   display: grid;
   gap: 0.5rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
+  color: var(--text);
 }
 
 input,
 textarea,
 select {
   width: 100%;
-  padding: 0.9rem 1rem;
-  border-radius: 14px;
+  padding: 1rem;
+  border-radius: 12px;
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.05);
   color: var(--text);
   font: inherit;
+  transition: border-color 180ms ease, background 180ms ease;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-  outline: 2px solid rgba(108, 140, 255, 0.35);
+  outline: none;
   border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 3px rgba(108, 140, 255, 0.1);
+}
+
+.contact-form button {
+  margin-top: 1rem;
 }
 
 .site-footer {
