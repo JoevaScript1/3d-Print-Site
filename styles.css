@@ -218,26 +218,30 @@ main {
 .showcase-grid,
 .store-layout {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 1rem;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 1.5rem;
 }
 
 .gallery-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
 }
 
 .gallery-card {
   overflow: hidden;
+  border-radius: 12px;
 }
 
 .gallery-card img {
-  height: 180px;
+  height: 240px;
   object-fit: cover;
-  border-radius: 18px 18px 0 0;
+  border-radius: 12px;
 }
 
-.gallery-card h3,
-.video-card h3,
+.gallery-card h3 {
+  margin: 0.5rem 0 0 0;
+  font-size: 1rem;
+}
 .product-card h3,
 .cart-card h3 {
   margin: 0;
@@ -338,14 +342,28 @@ main {
 }
 
 .video-card {
-  padding: 1rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.video-card h3 {
+  padding: 0 !important;
+  margin-bottom: 0.5rem !important;
+  font-size: 1rem;
+}
+
+.video-card p {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.9rem;
 }
 
 .video-card video {
-  margin-top: 1rem;
+  margin-top: 0;
   height: 100%;
-  min-height: 320px;
+  min-height: 300px;
   object-fit: cover;
+  border-radius: 12px;
 }
 
 .store-grid {
