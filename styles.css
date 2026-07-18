@@ -241,7 +241,7 @@ main {
 .product-card h3,
 .cart-card h3 {
   margin: 0;
-  padding: 1rem 1rem 0;
+  padding: 0.75rem 0.75rem 0;
 }
 
 .product-card {
@@ -267,10 +267,16 @@ main {
 }
 
 .product-card__content {
-  padding: 1rem;
+  padding: 0.75rem;
 }
 
 .product-card__content h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.product-card__content p {
+  font-size: 0.9rem;
   margin-bottom: 0.75rem;
 }
 
@@ -343,7 +349,7 @@ main {
 }
 
 .store-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 @media (max-width: 980px) {
@@ -358,6 +364,9 @@ main {
 
 @media (max-width: 720px) {
   .store-grid {
+    grid-template-columns: 1fr;
+  }
+}
     grid-template-columns: 1fr;
   }
 
