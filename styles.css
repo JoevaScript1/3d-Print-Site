@@ -131,7 +131,7 @@ main {
 .store-section .section-heading h2,
 .showcase .section-heading h2,
 .contact-section .section-heading h2 {
-  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-size: clamp(2rem, 3.5vw, 3rem);
 }
 
 .hero-text,
