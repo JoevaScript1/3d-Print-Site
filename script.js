@@ -1,3 +1,5 @@
+import { getCheckoutEndpoint } from "./checkout-config.js";
+
 const cartList = document.getElementById("cart-list");
 const cartTotal = document.getElementById("cart-total");
 const addToCartButtons = document.querySelectorAll(".add-to-cart");
@@ -60,7 +62,8 @@ if (checkoutButton) {
     checkoutButton.textContent = "Redirecting...";
 
     try {
-      const res = await fetch("http://localhost:4242/create-checkout-session", {
+      const endpoint = getCheckoutEndpoint();
+      const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ items: cartItems }),

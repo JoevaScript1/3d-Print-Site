@@ -41,7 +41,7 @@
         }
 
         try {
-          const res = await fetch(`http://localhost:4242/checkout-session?session_id=${encodeURIComponent(sessionId)}`);
+          const res = await fetch(`/.netlify/functions/checkout-session?session_id=${encodeURIComponent(sessionId)}`);
           const data = await res.json();
           if (!res.ok) {
             throw new Error(data.error || 'Unable to load session');
