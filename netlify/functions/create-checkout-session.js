@@ -3,7 +3,20 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+let stripeClient;
+
+function getStripe() {
+  if (!stripeClient) {
+    const secretKey = process.env.STRIPE_SECRET_KEY;
+    if (!secretKey) {
+      throw new Error("STRIPE_SECRET_KEY is missing.");
+    }
+
+    stripeClient = new Stripe(secretKey);
+  }
+
+  return stripeClient;
+}
 
 function getSiteOrigin(event) {
   const configuredOrigin =
@@ -25,22 +38,30 @@ function getSiteOrigin(event) {
   return "http://localhost:8888";
 }
 
-function getPriceLookup() {
-  const rawValue = process.env.STRIPE_PRICE_IDS;
+export function buildLineItems(items) {
+  return items.map((item) => {
+    const quantity = Number(item.quantity || 1);
+    const price = Number(item.price);
 
-  if (!rawValue) {
-    throw new Error(
-      "STRIPE_PRICE_IDS is missing. Add it in Netlify Environment Variables or your local .env file.",
-    );
-  }
+    if (!Number.isFinite(price) || price <= 0) {
+      throw new Error(`Invalid price for "${item.name || "item"}".`);
+    }
 
-  try {
-    return JSON.parse(rawValue);
-  } catch (error) {
-    throw new Error(
-      "STRIPE_PRICE_IDS must be a valid JSON object mapping product names to Stripe price IDs.",
-    );
-  }
+    if (!Number.isFinite(quantity) || quantity <= 0) {
+      throw new Error(`Invalid quantity for "${item.name || "item"}".`);
+    }
+
+    return {
+      price_data: {
+        currency: "usd",
+        product_data: {
+          name: item.name?.trim() || "Custom item",
+        },
+        unit_amount: Math.round(price * 100),
+      },
+      quantity,
+    };
+  });
 }
 
 export const handler = async function (event) {
@@ -63,24 +84,10 @@ export const handler = async function (event) {
 
     const normalizedEmail =
       typeof email === "string" && email.includes("@") ? email : "";
-    const priceLookup = getPriceLookup();
-
-    const line_items = items.map((item) => {
-      const priceId = priceLookup[item.name?.trim()];
-      if (!priceId) {
-        throw new Error(
-          `No Stripe price ID configured for "${item.name}". Add it to STRIPE_PRICE_IDS.`,
-        );
-      }
-
-      return {
-        price: priceId,
-        quantity: item.quantity || 1,
-      };
-    });
+    const line_items = buildLineItems(items);
 
     const origin = getSiteOrigin(event);
-    const session = await stripe.checkout.sessions.create({
+    const session = await getStripe().checkout.sessions.create({
       payment_method_types: ["card"],
       line_items,
       mode: "payment",
