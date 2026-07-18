@@ -128,6 +128,12 @@ main {
   font-size: clamp(2.2rem, 4vw, 3.8rem);
 }
 
+.store-section .section-heading h2,
+.showcase .section-heading h2,
+.contact-section .section-heading h2 {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+}
+
 .hero-text,
 .section-heading p,
 .info-card p,
