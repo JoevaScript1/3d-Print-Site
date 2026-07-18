@@ -370,7 +370,7 @@ main {
 .video-card video {
   margin-top: 0;
   height: 100%;
-  min-height: 300px;
+  min-height: 200px;
   object-fit: cover;
   border-radius: 12px;
 }
