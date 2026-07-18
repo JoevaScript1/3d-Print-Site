@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Your quote request has been received. Thank you for contacting Joe's 3D Printing." />
+    <title>Request Received - Joe's 3D Printing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .success-container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1rem;
+        background: linear-gradient(135deg, rgba(108, 140, 255, 0.05), rgba(71, 211, 194, 0.05));
+      }
+
+      .success-card {
+        max-width: 600px;
+        width: 100%;
+        text-align: center;
+        padding: 3rem 2rem;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(108, 140, 255, 0.2);
+        border-radius: 16px;
+        backdrop-filter: blur(10px);
+      }
+
+      .success-card h1 {
+        color: var(--accent);
+        margin-bottom: 1rem;
+        font-size: 2rem;
+      }
+
+      .success-card p {
+        color: var(--text);
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        font-size: 1rem;
+      }
+
+      .success-info {
+        background: rgba(71, 211, 194, 0.1);
+        border-left: 4px solid var(--accent);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 2rem 0;
+        text-align: left;
+      }
+
+      .success-info h3 {
+        color: var(--accent);
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-size: 1rem;
+      }
+
+      .success-info ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .success-info li {
+        color: var(--text);
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+      }
+
+      .callback-section {
+        background: rgba(108, 140, 255, 0.1);
+        border-left: 4px solid var(--primary);
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin: 2rem 0;
+        text-align: left;
+      }
+
+      .callback-section h3 {
+        color: var(--primary);
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        font-size: 1rem;
+      }
+
+      .phone-number {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        margin: 1rem 0;
+      }
+
+      .callback-section p {
+        margin: 0.5rem 0;
+        color: var(--text);
+        font-size: 0.95rem;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .button-group a {
+        text-decoration: none;
+      }
+
+      @media (max-width: 768px) {
+        .success-card {
+          padding: 2rem 1.5rem;
+        }
+
+        .success-card h1 {
+          font-size: 1.5rem;
+        }
+
+        .button-group {
+          flex-direction: column;
+        }
+
+        .button-group a {
+          width: 100%;
+        }
+
+        .button-group .button {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body style="background: #0a0e27;">
+    <header class="site-header">
+      <a class="brand" href="/">
+        <img src="assets/J3D_logo.png" alt="Joe's 3D Printing logo" />
+      </a>
+      <nav class="site-nav" aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <a href="/#services">Services</a>
+        <a href="/#showcase">Showcase</a>
+        <a href="/#store">Store</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+      <a class="nav-cta" href="/">Back to Site</a>
+    </header>
+
+    <main>
+      <div class="success-container">
+        <div class="success-card">
+          <h1>✓ Request Received!</h1>
+          <p>Thank you for reaching out to Joe's 3D Printing. We've received your project details and will review them carefully.</p>
+
+          <div class="success-info">
+            <h3>What Happens Next</h3>
+            <ul>
+              <li>✓ We'll review your project requirements</li>
+              <li>✓ We'll evaluate materials and timeline</li>
+              <li>✓ We'll send you a detailed quote via email</li>
+              <li>✓ We're ready to answer any questions</li>
+            </ul>
+          </div>
+
+          <div class="callback-section">
+            <h3>Need to Talk Sooner?</h3>
+            <p>Feel free to call us directly:</p>
+            <div class="phone-number">(715) 781-2151</div>
+            <p>We're happy to discuss your project and get started right away.</p>
+          </div>
+
+          <p style="color: var(--muted); font-size: 0.9rem; margin: 2rem 0 0 0;">
+            Expected response time: 24-48 hours
+          </p>
+
+          <div class="button-group">
+            <a href="/" class="button primary">Back to Home</a>
+            <a href="/#store" class="button secondary">Browse Store</a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 Joe's 3D Printing. All rights reserved.</p>
+      <p>Built for a modern, netlify-friendly launch.</p>
+    </footer>
+  </body>
+</html>

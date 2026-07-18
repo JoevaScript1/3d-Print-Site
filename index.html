@@ -195,7 +195,7 @@
           <p>Share a few details and we will get back to you with a tailored estimate and next steps.</p>
         </div>
 
-        <form class="contact-form" name="contact" method="POST" data-netlify="true">
+        <form class="contact-form" name="contact" method="POST" data-netlify="true" action="/form-success">
           <input type="hidden" name="form-name" value="contact" />
           <div class="form-row">
             <label>
@@ -205,6 +205,12 @@
             <label>
               Email
               <input type="email" name="email" placeholder="you@example.com" required />
+            </label>
+          </div>
+          <div class="form-row">
+            <label>
+              Phone
+              <input type="tel" name="phone" placeholder="(555) 123-4567" required />
             </label>
           </div>
           <label>
