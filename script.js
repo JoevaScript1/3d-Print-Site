@@ -112,7 +112,9 @@ if (checkoutButton) {
 
 // Image carousel functionality
 function initCarousels() {
-  const carousels = document.querySelectorAll(".gallery-carousel, .product-carousel");
+  const carousels = document.querySelectorAll(
+    ".gallery-carousel, .product-carousel",
+  );
 
   carousels.forEach((carousel) => {
     const container = carousel.querySelector(".carousel-container");
